@@ -24,17 +24,30 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import AppContainer from './src';
 
 class App extends React.Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      isFlashScreen: true
+    }
+    setTimeout(() => {
+      this.setState(() => {
+        return {isFlashScreen: false}
+      })
+    }, 1000);
+  }
   render(){
     return (
+      this.state.isFlashScreen ? 
       <>
         <StatusBar backgroundColor = "#E81667" />
         <View style = { styles.bookingTitle}>
             <Image
               source={require('./assets/images/app-logo.png')} />
         </View>
-      </>
+      </> : <AppContainer></AppContainer>
     );
   }
 }
